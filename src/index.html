@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-3.2.1.js"></script>
+</head>
+<body>
+    <div>hello world</div>
+</body>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+        // 注意这里的lottery指的是前面server.js中第4行代码通过app.use指定的名字, 而lottery.do则是数据文件lottery.js中指定的数据接口的名称
+        url: '/lottery.do',
+        type: 'GET'
+      })
+      .done(function(result) {
+        var data = result.data;
+        document.write(data.dayLotteryTimesLimit);
+        document.write(data.description);
+        console.log('success!!!...');
+      })
+      .fail(function(xhr, textStatus) {
+        console.log(xhr.status);
+        console.log(textStatus);
+      })
+      .always(function() {
+        console.log("complete");
+      });
+    })
+    
+</script>
+</html>
